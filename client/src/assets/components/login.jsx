@@ -41,34 +41,36 @@ function Login() {
             <input
               id="username"
               type="text"
+              placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               className="peer p-2 w-full bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 transition"
               required
             />
-            <label
+            {/* <label
               htmlFor="username"
               className="absolute left-3 top-3 text-gray-400 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 transition-all peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-400"
             >
               Username
-            </label>
+            </label> */}
           </div>
 
           <div className="relative">
             <input
               id="password"
               type="password"
+              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="peer p-2 w-full bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 transition"
               required
             />
-            <label
+            {/* <label
               htmlFor="password"
               className="absolute left-3 top-3 text-gray-400 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 transition-all peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-400"
             >
               Password
-            </label>
+            </label> */}
           </div>
 
           {/* Login Button with Glow Effect */}

@@ -47,14 +47,16 @@ function Signup() {
               id="user"
               name="user"
               type="text"
+              placeholder="Username"
               value={signupData.user}
               onChange={handleChange}
               className="peer p-2 w-full bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 transition"
               required
             />
-            <label htmlFor="user" className="absolute left-3 top-3 text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-400">
-              Username
-            </label>
+            
+            {/* <label htmlFor="user" className="absolute left-3 top-3 text-gray-400 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base  peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-400 peer-not-empty:top-1 peer-not-empty:text-xs peer-not-empty:text-blue-400">
+              
+            </label> */}
           </div>
           
           <div className="relative">
@@ -62,14 +64,15 @@ function Signup() {
               id="email"
               name="email"
               type="email"
+              placeholder="Email"
               value={signupData.email}
               onChange={handleChange}
               className="peer p-2 w-full bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 transition"
               required
             />
-            <label htmlFor="email" className="absolute left-3 top-3 text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-400">
-              Email
-            </label>
+            {/* <label htmlFor="email" className="absolute left-3 top-3 text-gray-400 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-400  peer-not-empty:top-1 peer-not-empty:text-xs peer-not-empty:text-blue-400">
+              
+            </label> */}
           </div>
 
           <div className="relative">
@@ -77,14 +80,15 @@ function Signup() {
               id="password"
               name="password"
               type="password"
+              placeholder="Password"
               value={signupData.password}
               onChange={handleChange}
               className="peer p-2 w-full bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 transition"
               required
             />
-            <label htmlFor="password" className="absolute left-3 top-3 text-gray-400 peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-400">
-              Password
-            </label>
+            {/* <label htmlFor="password" className="absolute left-3 top-3 text-gray-400 transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-1  peer-focus:text-xs peer-focus:text-blue-400 peer-not-empty:top-1 peer-not-empty:text-xs peer-not-empty:text-blue-400">
+              
+            </label> */}
           </div>
 
           <motion.button
