@@ -27,11 +27,6 @@ async function connectToDb() {
 }
 connectToDb();
 
-
-// const openai = new OpenAI({
-//   apiKey: process.env.OPENAI_API_KEY,
-// });
-
 const TERRAFORM_TOKEN = process.env.TERRAFORM_API_TOKEN;
 const WORKSPACE_ID = process.env.WORKSPACE_ID;
 
@@ -161,7 +156,7 @@ app.post("/analyze", async (req, res) => {
         "Authorization": `Bearer ${process.env.TOGETHER_API_KEY}`,
       },
       body: JSON.stringify({
-        model: "mistralai/Mistral-7B-Instruct-v0.2", // ✅ supported Together.ai model
+        model: "mistralai/Mistral-7B-Instruct-v0.2", 
         messages: [
           {
             role: "system",
