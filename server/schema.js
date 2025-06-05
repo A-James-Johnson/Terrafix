@@ -1,24 +1,39 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
+const signupSchema = new mongoose.Schema({
+  user: {
+    type: String,
+    required: true,
+  },
 
-const signupdataSchema = new mongoose.Schema({
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    password: {
-      type: String,
-      required: true,
-    },
-    user: {
-      type: String,
-      required: true,
-    }
-  });
-  
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+});
 
-  const Signup = mongoose.model('Signupschema', signupdataSchema)
+const terraformFileSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
-module.exports = { Signup }
+const Signup = mongoose.model("Signup", signupSchema);
+const TerraformFile = mongoose.model("TerraformFile", terraformFileSchema);
 
+module.exports = { Signup, TerraformFile };

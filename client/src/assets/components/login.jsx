@@ -14,7 +14,6 @@ function Login() {
         username,
         password,
       });
-
       if (response.status === 200) {
         alert("Login successful!");
         navigate("/home");
@@ -26,67 +25,45 @@ function Login() {
   };
 
   return (
-    <div className="bg-black text-white flex items-center justify-center min-h-screen transition-all">
+    <div className="bg-gradient-to-bl from-blue-200 via-white to-blue-400 min-h-screen flex items-center justify-center">
       <motion.div
-        className="relative bg-gray-800 bg-opacity-80 p-8 rounded-2xl shadow-2xl w-96 backdrop-blur-lg border border-gray-700"
-        initial={{ opacity: 0, y: 50 }}
+        className="bg-white/80 backdrop-blur-lg p-10 rounded-xl shadow-xl w-full max-w-md border border-blue-200"
+        initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6 }}
       >
-        <h2 className="text-3xl font-bold text-center text-white mb-6">Welcome Back</h2>
-
-        <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
-          {/* Floating Labels */}
-          <div className="relative">
-            <input
-              id="username"
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              className="peer p-2 w-full bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 transition"
-              required
-            />
-            {/* <label
-              htmlFor="username"
-              className="absolute left-3 top-3 text-gray-400 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 transition-all peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-400"
-            >
-              Username
-            </label> */}
-          </div>
-
-          <div className="relative">
-            <input
-              id="password"
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="peer p-2 w-full bg-gray-700 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-blue-500 transition"
-              required
-            />
-            {/* <label
-              htmlFor="password"
-              className="absolute left-3 top-3 text-gray-400 peer-placeholder-shown:top-3 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-500 transition-all peer-focus:top-1 peer-focus:text-xs peer-focus:text-blue-400"
-            >
-              Password
-            </label> */}
-          </div>
-
-          {/* Login Button with Glow Effect */}
+        <h2 className="text-3xl font-bold text-center mb-8 text-blue-600">Welcome Back</h2>
+        <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+          <input
+            id="username"
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white"
+            required
+          />
+          <input
+            id="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white"
+            required
+          />
           <motion.button
             type="button"
             onClick={handleLogin}
-            whileHover={{ scale: 1.05, boxShadow: "0px 0px 10px rgb(59,130,246)" }}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold shadow-lg transition"
+            whileHover={{ scale: 1.03 }}
+            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-md shadow-md transition"
           >
             Login
           </motion.button>
         </form>
-
-        <p className="text-center mt-4 text-gray-400">
-          Don't have an account? {" "}
-          <Link to="/signup" className="text-blue-400 hover:underline">
+        <p className="mt-6 text-center text-gray-600">
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-blue-500 hover:underline">
             Signup
           </Link>
         </p>
