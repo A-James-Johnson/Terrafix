@@ -9,20 +9,68 @@ import { TerraformProvider } from './assets/components/TerraformContext';
 import Overview from './assets/components/Overview';
 import FileViewer from './assets/components/Fileviewer';
 import Analysis from './assets/components/Analysis';
+import Tokenverification from './assets/components/Tokenverification';
+
 function App() {
   return (
     <Routes>
+      {/* Public Routes */}
       <Route path="/" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/home" element={<Home />} />
-      <Route path="/dashboard" element={<TerraformProvider><Dashboard /></TerraformProvider>} />
-      <Route path="/workspace" element={<Workspace />} />
-      <Route path="/overview" element={<TerraformProvider><Overview /></TerraformProvider>} />
-      <Route 
-        path="/analysis" 
-        element={<Analysis />}
+
+      {/* Protected Routes */}
+      <Route
+        path="/home"
+        element={
+          <Tokenverification>
+            <Home />
+          </Tokenverification>
+        }
       />
-      <Route path="/file/:filename" element={<FileViewer />} />
+      <Route
+        path="/dashboard"
+        element={
+          <Tokenverification>
+            <TerraformProvider>
+              <Dashboard />
+            </TerraformProvider>
+          </Tokenverification>
+        }
+      />
+      <Route
+        path="/workspace"
+        element={
+          <Tokenverification>
+            <Workspace />
+          </Tokenverification>
+        }
+      />
+      <Route
+        path="/overview"
+        element={
+          <Tokenverification>
+            <TerraformProvider>
+              <Overview />
+            </TerraformProvider>
+          </Tokenverification>
+        }
+      />
+      <Route
+        path="/analysis"
+        element={
+          <Tokenverification>
+            <Analysis />
+          </Tokenverification>
+        }
+      />
+      <Route
+        path="/file/:filename"
+        element={
+          <Tokenverification>
+            <FileViewer />
+          </Tokenverification>
+        }
+      />
     </Routes>
   );
 }

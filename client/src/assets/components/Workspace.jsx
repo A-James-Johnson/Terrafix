@@ -8,7 +8,7 @@ import { useTheme } from "./ThemeContext";
 const Workspace = () => {
   const [messages, setMessages] = useState([
     { role: "system", content: "You are a funny LLM" },
-    { role: "user", content: "Hello! My name is harish." },
+    { role: "user", content: "Hello! My name is My friend." },
     { role: "assistant", content: "Hello" },
     { text: "Welcome to the Workspace!", sender: "bot", time: "10:15 AM" },
     { text: "Hey there! How can I help you?", sender: "bot", time: "10:16 AM" },

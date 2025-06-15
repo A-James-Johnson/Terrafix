@@ -5,8 +5,10 @@ import Editor from "@monaco-editor/react";
 import { useTerraform } from "./TerraformContext";
 import { TerraformContext } from "./TerraformContext";
 
-const Dashboard=() =>{
-  const [code, setCode] = useState("// Write Terraform code here !! ");
+const Dashboard = () => {
+  const [code, setCode] = useState(() => {
+    return localStorage.getItem("terraformCode") || "// Write Terraform code here !! ";
+  });
   const { saveSplitFiles } = useTerraform();
   const [loading, setLoading] = useState(true);
   const { terraformCode, setTerraformCode } = useContext(TerraformContext);
@@ -23,8 +25,7 @@ const Dashboard=() =>{
         {
           method: "POST",
           headers: {
-            "x-api-key":
-              "d122264ababbc56372f57bc36e821bd962035aaa4fe62addf2d2aa8660ec0813",
+            "x-api-key": "d122264ababbc56372f57bc36e821bd962035aaa4fe62addf2d2aa8660ec0813",
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ text: code }),
@@ -38,13 +39,11 @@ const Dashboard=() =>{
       for (let i = 0; i < 35; i++) {
         const result = await fetch(dataUrl, {
           headers: {
-            "x-api-key":
-              "d122264ababbc56372f57bc36e821bd962035aaa4fe62addf2d2aa8660ec0813",
+            "x-api-key": "d122264ababbc56372f57bc36e821bd962035aaa4fe62addf2d2aa8660ec0813",
           },
         });
 
         const resultJson = await result.json();
-
         if (resultJson.completed) {
           resultData = resultJson;
           break;
@@ -116,11 +115,11 @@ Plan: 0 to add, 1 to change, 0 to destroy.`;
 
   # aws_lambda_function.example will be destroyed
   - resource "aws_lambda_function" "example" {
-      - arn          = "arn:aws:lambda:us-east-1:123456789012:function:example-function" -> null
+      - arn           = "arn:aws:lambda:us-east-1:123456789012:function:example-function" -> null
       - function_name = "example-function" -> null
-      - handler      = "index.handler" -> null
-      - runtime      = "nodejs14.x" -> null
-      - timeout      = 3 -> null
+      - handler       = "index.handler" -> null
+      - runtime       = "nodejs14.x" -> null
+      - timeout       = 3 -> null
   }
 
 Plan: 0 to add, 0 to change, 1 to destroy.`;
@@ -130,22 +129,17 @@ Plan: 0 to add, 0 to change, 1 to destroy.`;
     return planOutput;
   };
 
-  useEffect(() => {
-    setLoading(false);
-  }, []);
-
   const handleSave = async () => {
-    const mainMatches =
-      code.match(/resource\s+\".+?\"\s+\".+?\"\s+{[^}]*}/gs)?.join("\n") || "";
-    const variableMatches =
-      code.match(/variable\s+\".+?\"\s+{[^}]*}/gs)?.join("\n") || "";
-    const outputMatches =
-      code.match(/output\s+\".+?\"\s+{[^}]*}/gs)?.join("\n") || "";
+    const mainMatches = code.match(/resource\s+".+?"\s+".+?"\s+{[^}]*}/gs)?.join("\n") || "";
+    const variableMatches = code.match(/variable\s+".+?"\s+{[^}]*}/gs)?.join("\n") || "";
+    const outputMatches = code.match(/output\s+".+?"\s+{[^}]*}/gs)?.join("\n") || "";
+
     const fullContent = JSON.stringify([
       mainMatches,
       variableMatches,
       outputMatches,
     ]);
+
     const filename = prompt("Enter filename:");
     if (filename) {
       const res = await fetch("http://localhost:9000/save-file", {
@@ -159,13 +153,22 @@ Plan: 0 to add, 0 to change, 1 to destroy.`;
     }
   };
 
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
   if (loading) return <div className="text-white p-10">Loading...</div>;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 via-stone-100 to-blue-200 text-black">
       <div className="flex">
         <aside className="w-64 min-h-screen p-6 bg-gray-600 border-r border-gray-600 shadow-lg text-white">
-          <h2 className="text-2xl font-bold mb-6 px-4 py-2 border border-white shadow-lg  w-full rounded-lg inline-block">Terrafix</h2>
+          <h2
+            className="text-2xl font-bold mb-6 px-4 py-2 border border-white shadow-lg w-full rounded-lg inline-block cursor-pointer"
+            onClick={() => navigate("/home")}
+          >
+            Terrafix
+          </h2>
           <nav className="space-y-3">
             {["Overview", "Code", "AI-chat"].map((item) => (
               <button
@@ -181,6 +184,7 @@ Plan: 0 to add, 0 to change, 1 to destroy.`;
             ))}
           </nav>
         </aside>
+
         <main className="flex-1 p-8">
           <h1 className="text-3xl font-bold mb-4">Terraform Code Editor</h1>
           <div className="h-60 rounded-lg overflow-hidden border border-gray-600">
@@ -188,7 +192,10 @@ Plan: 0 to add, 0 to change, 1 to destroy.`;
               height="100%"
               defaultLanguage="terraform"
               value={code}
-              onChange={(value) => setCode(value)}
+              onChange={(value) => {
+                setCode(value);
+                localStorage.setItem("terraformCode", value || "");
+              }}
               theme="vs-dark"
             />
           </div>
@@ -245,6 +252,6 @@ Plan: 0 to add, 0 to change, 1 to destroy.`;
       </div>
     </div>
   );
-}
+};
 
 export default Dashboard;
