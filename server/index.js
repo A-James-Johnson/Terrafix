@@ -11,6 +11,8 @@ const path = require('path');
 const { exec } = require('child_process');
 const fs = require('fs');
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
+
 // const authRoutes = require("./routes/authRoutes");
 
 
@@ -20,8 +22,11 @@ const jwt = require("jsonwebtoken");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
-
+// app.use(cors());
+app.use(cors({
+  origin: "https://terrafix.vercel.app",
+  credentials: true
+}));
 async function connectToDb() {
   try {
     await mongoose.connect("mongodb+srv://James321485:James321485@cluster0.835jjax.mongodb.net/Review?retryWrites=true&w=majority&appName=Cluster0");
