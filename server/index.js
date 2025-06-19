@@ -42,9 +42,7 @@ const authRoutes = require("./routes/authRoutes");
 app.use("/", authRoutes); // ✅ Now this works perfectly
 app.use("/", terraformRoutes);
 
-const path = require('path');
-const express = require('express');
-const app = express();
+
 
 // Serve static files from Vite build
 app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
