@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 // import { clearItem } from '../mockdata/cartSlice';
 // import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
-
+import baseURL from "./baseURL";
 const Signup = () => {
   const [username, setusername] = useState("");
   const [email, setemail] = useState("");
@@ -32,7 +32,7 @@ const Signup = () => {
   };
 
   const signup = () => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/signup`, {
+    fetch(`${baseURL}/signup`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ username, email, password }),

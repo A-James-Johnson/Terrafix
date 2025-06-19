@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Shield, Plus, MessageSquare, FileText } from "lucide-react";
 import Profile from "./Profile";
+import baseURL from "./baseURL";
 
 function Home() {
   const [darkMode, setDarkMode] = useState(() => localStorage.getItem("darkMode") === "true");
@@ -17,7 +18,7 @@ function Home() {
 
   const fetchFiles = async () => {
     try {
-      const res = await fetch("http://localhost:9000/get-files");
+      const res = await fetch(`${baseURL}/get-files`);
       const data = await res.json();
       setFiles(data.files);
     } catch (error) {
@@ -27,7 +28,7 @@ function Home() {
 
   const handleFileClick = async (filename) => {
     setSelectedFileName(filename);
-    const res = await fetch(`http://localhost:9000/get-file?name=${filename}`);
+    const res = await fetch(`${baseURL}/get-file?name=${filename}`);
     const data = await res.json();
     setSelectedContent(JSON.parse(data.content));
   };

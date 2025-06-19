@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 //import { clearItem } from '../mockdata/cartSlice';
 //import { useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
+import baseURL from "./baseURL";
 
 const Login = () => {
   const [email, setemail] = useState('');
@@ -33,7 +34,7 @@ const Login = () => {
   };
 
   const login = () => {
-    fetch("http://localhost:9000/login", {
+    fetch(`${baseURL}/login`, {
       method: "POST",
       headers: {
         "Content-type": "application/json"

@@ -4,6 +4,7 @@ import { AlertCircle, Loader2 } from "lucide-react";
 import Editor from "@monaco-editor/react";
 import { useTerraform } from "./TerraformContext";
 import { TerraformContext } from "./TerraformContext";
+import baseURL from "./baseURL"
 
 const Dashboard = () => {
   const [code, setCode] = useState(() => {
@@ -142,7 +143,7 @@ Plan: 0 to add, 0 to change, 1 to destroy.`;
 
     const filename = prompt("Enter filename:");
     if (filename) {
-      const res = await fetch("http://localhost:9000/save-file", {
+      const res = await fetch(`${baseURL}/save-file`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: filename, content: fullContent }),

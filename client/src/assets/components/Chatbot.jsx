@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import baseURL from "./baseURL";
 
 function Chatbot() {
     const [message, setMessage] = useState("");
@@ -7,7 +8,7 @@ function Chatbot() {
 
     const sendMessage = async () => {
         try {
-            const res = await axios.post("http://localhost:5000/chat", { message });
+            const res = await axios.post(`${baseURL}/chat`, { message });
             setResponse(res.data.response);
         } catch (error) {
             console.error("Error:", error);

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import baseURL from "./baseURL"
 
 function FileViewer() {
   const { filename } = useParams();
@@ -9,7 +10,7 @@ function FileViewer() {
   useEffect(() => {
     async function fetchFile() {
       try {
-        const res = await fetch(`http://localhost:9000/get-file?name=${filename}`);
+        const res = await fetch(`${baseURL}/get-file?name=${filename}`);
         const data = await res.json();
         setFileData(JSON.parse(data.content));
       } catch (error) {
