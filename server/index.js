@@ -12,6 +12,7 @@ const { exec } = require('child_process');
 const fs = require('fs');
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
+const path = require('path');
 
 // const authRoutes = require("./routes/authRoutes");
 
@@ -40,6 +41,15 @@ const terraformRoutes =require("./routes/terraformRoutes");
 const authRoutes = require("./routes/authRoutes");
 app.use("/", authRoutes); // ✅ Now this works perfectly
 app.use("/", terraformRoutes);
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// The catch-all handler: for any request that doesn't match an API route
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
+
 
 
 const TERRAFORM_TOKEN = process.env.TERRAFORM_API_TOKEN;
