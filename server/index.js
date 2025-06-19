@@ -42,12 +42,15 @@ const authRoutes = require("./routes/authRoutes");
 app.use("/", authRoutes); // ✅ Now this works perfectly
 app.use("/", terraformRoutes);
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+const path = require('path');
+const express = require('express');
+const app = express();
 
-// The catch-all handler: for any request that doesn't match an API route
+// Serve static files from Vite build
+app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
+
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+  res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
 
 
