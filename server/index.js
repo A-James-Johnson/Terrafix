@@ -11,8 +11,8 @@ const path = require('path');
 const { exec } = require('child_process');
 const fs = require('fs');
 const jwt = require("jsonwebtoken");
-const cors = require("cors");
-const path = require('path');
+
+
 
 // const authRoutes = require("./routes/authRoutes");
 
