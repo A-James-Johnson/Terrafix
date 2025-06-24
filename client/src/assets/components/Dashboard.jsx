@@ -60,7 +60,7 @@ const Dashboard = () => {
       }
 
       sessionStorage.setItem("analysisResult", JSON.stringify(resultData));
-      sessionStorage.setItem("terraformCode", code);
+      localStorage.setItem("terraformcode", code);
 
       navigate("/Analysis", {
         state: {

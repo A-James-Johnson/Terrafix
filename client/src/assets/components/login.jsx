@@ -13,17 +13,18 @@ const Login = () => {
   //const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    const code=localStorage.getItem("terraformcode");
-    if(code){
-      localStorage.removeItem("terraformcode");
-    }
+    // const token = localStorage.getItem("accessToken");
+    // const code=localStorage.getItem("terraformcode");
+    // if(code){
+    //   localStorage.removeItem("terraformcode");
+    // }
    
 
-    if (token) {
-      localStorage.removeItem("accessToken");
-      console.log("Token cleared on login page visit");
-    }
+    // if (token) {
+    //   localStorage.removeItem("accessToken");
+    //   console.log("Token cleared on login page visit");
+    // }
+    localStorage.clear();
     
     
   }, []);

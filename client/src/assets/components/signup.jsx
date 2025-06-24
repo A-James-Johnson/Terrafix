@@ -13,12 +13,16 @@ const Signup = () => {
   //const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-
-    if (token) {
-      localStorage.removeItem("accessToken");
-      console.log("Token cleared on signup page visit");
-    }
+    // const token = localStorage.getItem("accessToken");
+    // const code=localStorage.getItem("terraformcode");
+    // if (token) {
+    //   localStorage.removeItem("accessToken");
+    //   console.log("Token cleared on signup page visit");
+    // }
+    // if(code){
+    //   localStorage.removeItem("terraformcode");
+    // }
+    localStorage.clear();
 
   }, []);
 

@@ -14,9 +14,16 @@ const Profile = ({ onClose }) => {
 
 
   const handleClick =()=>{
-   localStorage.removeItem("user");
+  //  localStorage.removeItem("user");
+  //  localStorage.removeItem("accessToken");
+  //  const code=localStorage.getItem("terraformcode");
+  //   if(code){
+  //     localStorage.removeItem("terraformcode");
+  //   }
+  localStorage.clear();
    navigate("/"); 
-   
+   window.location.reload();
+
 
    
   }
