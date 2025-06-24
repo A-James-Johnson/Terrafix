@@ -160,99 +160,201 @@ Plan: 0 to add, 0 to change, 1 to destroy.`;
 
   if (loading) return <div className="text-white p-10">Loading...</div>;
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-100 via-stone-100 to-blue-200 text-black">
-      <div className="flex">
-        <aside className="w-64 min-h-screen p-6 bg-gray-600 border-r border-gray-600 shadow-lg text-white">
-          <h2
-            className="text-2xl font-bold mb-6 px-4 py-2 border border-white shadow-lg w-full rounded-lg inline-block cursor-pointer"
-            onClick={() => navigate("/home")}
+  // return (
+  //   <div className="min-h-screen bg-gradient-to-br from-blue-100 via-stone-100 to-blue-200 text-black">
+  //     <div className="flex">
+  //       <aside className="w-64 min-h-screen p-6 bg-gray-600 border-r border-gray-600 shadow-lg text-white">
+  //         <h2
+  //           className="text-2xl font-bold mb-6 px-4 py-2 border border-white shadow-lg w-full rounded-lg inline-block cursor-pointer"
+  //           onClick={() => navigate("/home")}
+  //         >
+  //           Terrafix
+  //         </h2>
+  //         <nav className="space-y-3">
+  //           {["Overview", "Code", "AI-chat"].map((item) => (
+  //             <button
+  //               key={item}
+  //               className="w-full px-4 py-2 text-left text-md font-bold rounded-md hover:bg-gray-600 transition"
+  //               onClick={() => {
+  //                 if (item === "AI-chat") navigate("/workspace");
+  //                 else if (item === "Overview") navigate("/overview");
+  //               }}
+  //             >
+  //               {item}
+  //             </button>
+  //           ))}
+  //         </nav>
+  //       </aside>
+
+  //       <main className="flex-1 p-8">
+  //         <h1 className="text-3xl font-bold mb-4">Terraform Code Editor</h1>
+  //         <div className="h-60 rounded-lg overflow-hidden border border-gray-600">
+  //           <Editor
+  //             height="100%"
+  //             defaultLanguage="terraform"
+  //             value={code}
+  //             onChange={(value) => {
+  //               setCode(value);
+  //               localStorage.setItem("terraformCode", value || "");
+  //             }}
+  //             theme="vs-dark"
+  //           />
+  //         </div>
+
+  //         <div className="mt-6 space-y-4">
+  //           <div className="flex items-start bg-yellow-600 bg-opacity-20 p-4 rounded-md border border-yellow-700">
+  //             <AlertCircle className="text-yellow-400 mt-1 mr-3" />
+  //             <div>
+  //               <h3 className="font-semibold">Resource not found</h3>
+  //               <p className="text-sm text-gray-700">
+  //                 The 'aws_instance' resource refers to an AMI that does not exist.
+  //               </p>
+  //             </div>
+  //           </div>
+  //           <div className="flex gap-4">
+  //             <button
+  //               className="px-6 py-3 bg-blue-600 rounded-lg font-semibold hover:bg-blue-700 flex items-center gap-2"
+  //               onClick={handleAnalyze}
+  //               disabled={analyzing}
+  //             >
+  //               {analyzing && <Loader2 className="animate-spin w-5 h-5" />}
+  //               {analyzing ? "Analyzing..." : "Analyze Code"}
+  //             </button>
+  //             <button
+  //               className="px-6 py-3 bg-green-600 rounded-lg font-semibold hover:bg-green-700"
+  //               onClick={handleDeploy}
+  //             >
+  //               Deploy
+  //             </button>
+  //             <button
+  //               className="px-6 py-3 bg-gray-600 rounded-lg font-semibold hover:bg-gray-700 text-white"
+  //               onClick={handleSave}
+  //             >
+  //               Save
+  //             </button>
+  //           </div>
+  //         </div>
+
+  //         {modalOpen && (
+  //           <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center z-50">
+  //             <div className="bg-white text-black rounded-lg p-6 w-11/12 md:w-2/3 lg:w-1/2 shadow-xl overflow-y-auto max-h-[80vh]">
+  //               <h2 className="text-xl font-bold mb-4">Terraform Plan Output</h2>
+  //               <pre className="whitespace-pre-wrap text-sm">{planOutput}</pre>
+  //               <button
+  //                 onClick={() => setModalOpen(false)}
+  //                 className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+  //               >
+  //                 Close
+  //               </button>
+  //             </div>
+  //           </div>
+  //         )}
+  //       </main>
+  //     </div>
+  //   </div>
+  // );
+return(
+  <div className="min-h-screen bg-gradient-to-br from-blue-100 via-stone-100 to-blue-200 text-black">
+  <div className="flex flex-col md:flex-row">
+    {/* Sidebar */}
+    <aside className="w-full md:w-64 p-4 md:p-6 bg-gray-800 text-white shadow-md">
+      <h2
+        className="text-xl md:text-2xl font-bold mb-4 md:mb-6 px-4 py-2 border border-white shadow-lg rounded-lg cursor-pointer"
+        onClick={() => navigate("/home")}
+      >
+        Terrafix
+      </h2>
+      <nav className="space-y-2">
+        {["Overview", "Code", "AI-chat"].map((item) => (
+          <button
+            key={item}
+            className="w-full px-4 py-2 text-left text-sm md:text-base font-semibold rounded-md hover:bg-gray-700 transition"
+            onClick={() => {
+              if (item === "AI-chat") navigate("/workspace");
+              else if (item === "Overview") navigate("/overview");
+            }}
           >
-            Terrafix
-          </h2>
-          <nav className="space-y-3">
-            {["Overview", "Code", "AI-chat"].map((item) => (
-              <button
-                key={item}
-                className="w-full px-4 py-2 text-left text-md font-bold rounded-md hover:bg-gray-600 transition"
-                onClick={() => {
-                  if (item === "AI-chat") navigate("/workspace");
-                  else if (item === "Overview") navigate("/overview");
-                }}
-              >
-                {item}
-              </button>
-            ))}
-          </nav>
-        </aside>
+            {item}
+          </button>
+        ))}
+      </nav>
+    </aside>
 
-        <main className="flex-1 p-8">
-          <h1 className="text-3xl font-bold mb-4">Terraform Code Editor</h1>
-          <div className="h-60 rounded-lg overflow-hidden border border-gray-600">
-            <Editor
-              height="100%"
-              defaultLanguage="terraform"
-              value={code}
-              onChange={(value) => {
-                setCode(value);
-                localStorage.setItem("terraformCode", value || "");
-              }}
-              theme="vs-dark"
-            />
-          </div>
+    {/* Main Content */}
+    <main className="flex-1 p-4 md:p-8">
+      <h1 className="text-2xl md:text-3xl font-bold mb-4">Terraform Code Editor</h1>
 
-          <div className="mt-6 space-y-4">
-            <div className="flex items-start bg-yellow-600 bg-opacity-20 p-4 rounded-md border border-yellow-700">
-              <AlertCircle className="text-yellow-400 mt-1 mr-3" />
-              <div>
-                <h3 className="font-semibold">Resource not found</h3>
-                <p className="text-sm text-gray-700">
-                  The 'aws_instance' resource refers to an AMI that does not exist.
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <button
-                className="px-6 py-3 bg-blue-600 rounded-lg font-semibold hover:bg-blue-700 flex items-center gap-2"
-                onClick={handleAnalyze}
-                disabled={analyzing}
-              >
-                {analyzing && <Loader2 className="animate-spin w-5 h-5" />}
-                {analyzing ? "Analyzing..." : "Analyze Code"}
-              </button>
-              <button
-                className="px-6 py-3 bg-green-600 rounded-lg font-semibold hover:bg-green-700"
-                onClick={handleDeploy}
-              >
-                Deploy
-              </button>
-              <button
-                className="px-6 py-3 bg-gray-600 rounded-lg font-semibold hover:bg-gray-700 text-white"
-                onClick={handleSave}
-              >
-                Save
-              </button>
-            </div>
-          </div>
-
-          {modalOpen && (
-            <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center z-50">
-              <div className="bg-white text-black rounded-lg p-6 w-11/12 md:w-2/3 lg:w-1/2 shadow-xl overflow-y-auto max-h-[80vh]">
-                <h2 className="text-xl font-bold mb-4">Terraform Plan Output</h2>
-                <pre className="whitespace-pre-wrap text-sm">{planOutput}</pre>
-                <button
-                  onClick={() => setModalOpen(false)}
-                  className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          )}
-        </main>
+      {/* Editor */}
+      <div className="h-64 md:h-80 rounded-lg overflow-hidden border border-gray-600">
+        <Editor
+          height="100%"
+          defaultLanguage="terraform"
+          value={code}
+          onChange={(value) => {
+            setCode(value);
+            localStorage.setItem("terraformCode", value || "");
+          }}
+          theme="vs-dark"
+        />
       </div>
-    </div>
-  );
+
+      {/* Alert */}
+      <div className="mt-6 bg-yellow-600 bg-opacity-20 p-4 rounded-md border border-yellow-700 flex flex-col sm:flex-row items-start">
+        <AlertCircle className="text-yellow-400 mt-1 mr-0 sm:mr-3" />
+        <div>
+          <h3 className="font-semibold">Resource not found</h3>
+          <p className="text-sm text-gray-700">
+            The 'aws_instance' resource refers to an AMI that does not exist.
+          </p>
+        </div>
+      </div>
+
+      {/* Action Buttons */}
+      <div className="mt-4 flex flex-col sm:flex-row gap-3">
+        <button
+          className="px-5 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 flex items-center justify-center gap-2"
+          onClick={handleAnalyze}
+          disabled={analyzing}
+        >
+          {analyzing && <Loader2 className="animate-spin w-5 h-5" />}
+          {analyzing ? "Analyzing..." : "Analyze Code"}
+        </button>
+
+        <button
+          className="px-5 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700"
+          onClick={handleDeploy}
+        >
+          Deploy
+        </button>
+
+        <button
+          className="px-5 py-3 bg-gray-700 text-white rounded-lg font-semibold hover:bg-gray-800"
+          onClick={handleSave}
+        >
+          Save
+        </button>
+      </div>
+
+      {/* Modal */}
+      {modalOpen && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="bg-white text-black rounded-lg p-4 md:p-6 w-[90%] sm:w-4/5 lg:w-1/2 shadow-xl max-h-[80vh] overflow-y-auto">
+            <h2 className="text-lg md:text-xl font-bold mb-4">Terraform Plan Output</h2>
+            <pre className="whitespace-pre-wrap text-sm">{planOutput}</pre>
+            <button
+              onClick={() => setModalOpen(false)}
+              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </main>
+  </div>
+</div>
+
+)
 };
 
 export default Dashboard;
