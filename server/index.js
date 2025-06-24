@@ -25,7 +25,7 @@ const app = express();
 app.use(express.json());
 // app.use(cors());
 app.use(cors({
-  origin: "https://terrafix.vercel.app",
+  origin: ["http://localhost:5173", "https://terrafix.vercel.app"],
   credentials: true
 }));
 async function connectToDb() {
