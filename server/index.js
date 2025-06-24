@@ -262,6 +262,12 @@ const WORKSPACE_ID = process.env.WORKSPACE_ID;
 //   }
 // });
 
-app.listen(9000, () => {
-  console.log("✅ Server is running on port 9000");
+// app.listen(9000, () => {
+//   console.log("✅ Server is running on port 9000");
+// });
+
+const PORT = process.env.PORT || 9000;
+
+app.listen(PORT, () => {
+  console.log(`✅ Server is running on port ${PORT}`);
 });
