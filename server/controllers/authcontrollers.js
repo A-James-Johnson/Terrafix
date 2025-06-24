@@ -17,7 +17,7 @@ exports.signup =async (req, res) => {
     const newUser = new Signup({ username, email, password: hashedPassword });
 
     const savedUser = await newUser.save();
-    const token = jwt.sign({ id: savedUser._id }, "secretKey");
+    const token = jwt.sign({ id: savedUser._id }, process.env.JWT_SECRET);
 
     return res.status(200).send({
       user: {
@@ -49,7 +49,7 @@ exports.login = async (req, res) => {
       return res.status(400).send({ message: "Incorrect password" });
     }
 
-    const token = jwt.sign({ id: user._id }, "secretKey");
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
 
     return res.status(200).send({
       user: {
